@@ -173,6 +173,23 @@ vim.o.confirm = true
 --  See `:help hlsearch`
 vim.keymap.set('n', '<Esc>', '<cmd>nohlsearch<CR>')
 
+-- MY STUFF
+vim.keymap.set('n', '<leader>ab', '<cmd>!bash build.sh<CR>')
+vim.keymap.set('n', '<leader>oi', '<cmd>e ~/.config/nvim/init.lua<CR>')
+
+vim.o.tabstop = 4
+vim.o.softtabstop = 4
+vim.o.shiftwidth = 4
+vim.o.expandtab = true
+vim.o.smartindent = true
+
+vim.o.wrap = false
+vim.o.swapfile = false
+vim.o.backup = false
+
+vim.api.nvim_set_hl(0, 'Normal', { bg = 'none' })
+vim.api.nvim_set_hl(0, 'NormalFloat', { bg = 'none' })
+
 -- Diagnostic keymaps
 vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open diagnostic [Q]uickfix list' })
 
@@ -898,6 +915,14 @@ require('lazy').setup({
     end,
   },
 
+  {
+    'windwp/nvim-autopairs',
+    event = 'InsertEnter',
+    config = true,
+    -- use opts = {} for passing setup options
+    -- this is equivalent to setup({}) function
+  },
+
   -- Highlight todo, notes, etc in comments
   { 'folke/todo-comments.nvim', event = 'VimEnter', dependencies = { 'nvim-lua/plenary.nvim' }, opts = { signs = false } },
 
@@ -917,7 +942,19 @@ require('lazy').setup({
       -- - saiw) - [S]urround [A]dd [I]nner [W]ord [)]Paren
       -- - sd'   - [S]urround [D]elete [']quotes
       -- - sr)'  - [S]urround [R]eplace [)] [']
-      require('mini.surround').setup()
+      require('mini.surround').setup {
+        mappings = {
+          add = 'rsa', -- Add surrounding in Normal and Visual modes
+          delete = 'rsd', -- Delete surrounding
+          find = 'rsf', -- Find surrounding (to the right)
+          find_left = 'rsF', -- Find surrounding (to the left)
+          highlight = 'rsh', -- Highlight surrounding
+          replace = 'rsr', -- Replace surrounding
+
+          suffix_last = 'l', -- Suffix to search with "prev" method
+          suffix_next = 'n', -- Suffix to search with "next" method
+        },
+      }
 
       -- Simple and easy statusline.
       --  You could remove this setup call if you don't like it,
