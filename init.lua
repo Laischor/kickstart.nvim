@@ -187,9 +187,6 @@ vim.o.wrap = false
 vim.o.swapfile = false
 vim.o.backup = false
 
-vim.api.nvim_set_hl(0, 'Normal', { bg = 'none' })
-vim.api.nvim_set_hl(0, 'NormalFloat', { bg = 'none' })
-
 -- Diagnostic keymaps
 vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open diagnostic [Q]uickfix list' })
 
@@ -912,6 +909,9 @@ require('lazy').setup({
       -- Like many other themes, this one has different styles, and you could load
       -- any other, such as 'tokyonight-storm', 'tokyonight-moon', or 'tokyonight-day'.
       vim.cmd.colorscheme 'tokyonight-night'
+
+      vim.api.nvim_set_hl(0, 'Normal', { bg = 'none' })
+      vim.api.nvim_set_hl(0, 'NormalFloat', { bg = 'none' })
     end,
   },
 
