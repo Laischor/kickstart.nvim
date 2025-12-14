@@ -747,6 +747,20 @@ require('lazy').setup({
           end,
         },
       }
+
+      vim.lsp.config('arduino_language_server', {
+        cmd = {
+          'arduino-language-server',
+          '-clangd',
+          'clangd',
+          '-cli',
+          '/home/mr/.local/bin/arduino-cli',
+          '-cli-config',
+          '/home/mr/.arduino15/arduino-cli.yaml',
+          '-fqbn',
+          'esp32:esp32:esp32c6',
+        },
+      })
     end,
   },
 
